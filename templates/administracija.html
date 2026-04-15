@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Administracija - QA & Inventar{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+         <h2 class="mt-4">Administracija Resursa (Inventar)</h2>
+
+        {% if resursi == [] %}
+        <p>Nema unetih resursa u bazi.</p>
+        {% endif %}
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Naziv uređaja</th>
+                <th scope="col">Tip</th>
+                <th scope="col">Serijski broj</th>
+                <th scope="col">Godina nabavke</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for r in resursi %}
+            <tr>
+                <td><strong>{{r.naziv}}</strong></td>
+                <td>{{r.tip}}</td>
+                <td><code>{{r.serijski_broj or "/"}}</code></td>
+                <td>{{r.godina_nabavke}}</td>
+                 <td style="text-align: right;">  
+                    {# Ovde koristiš rute iz main.py koje smo napravili #}
+                    <a class="btn btn-sm btn-info" href="{{ url_for('add_resource', id=r.id) }}">Izmeni</a>
+                    <a class="btn btn-sm btn-warning" href="{{ url_for('delete_resource', id=r.id) }}">Obriši</a> 
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{{ url_for('add_resource') }}">Dodaj novi resurs</a>
+
+<hr class="my-5">
+
+        <h2>Administracija Lokacija</h2>
+
+        {% if lokacije == [] %}
+        <p>Nema unetih lokacija.</p>
+        {% endif %}
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Naziv lokacije</th>
+                <th scope="col">Sprat/Sektor</th>
+                <th scope="col">Odgovorno lice</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for l in lokacije %}
+            <tr>
+                <td>{{l.naziv}}</td>
+                <td>{{l.sprat or "/"}}</td>
+                <td>{{l.odgovorno_lice}}</td>
+
+                <td style="text-align: right;"> 
+                    <a class="btn btn-sm btn-info" href="{{ url_for('add_location', id=l.id) }}">Izmeni</a>
+                    {# Ako nemaš delete_location rutu, možemo je dodati #}
+                    <a class="btn btn-sm btn-warning" href="#">Obriši</a> 
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{{ url_for('add_location') }}">Dodaj novu lokaciju</a>
+
+    </div>
+</div>
+{% endblock %}

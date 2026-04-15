@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}Izmena podataka{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ title }}</h2>
+    <div class="card shadow-sm p-4 bg-light">
+        {{ render_form(form) }}
+    </div>
+    <div class="mt-3">
+        <a href="{{ url_for('admin_page') }}" class="btn btn-secondary">Odustani</a>
+    </div>
+</div>
+{% endblock %}

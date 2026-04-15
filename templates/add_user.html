@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="card-title">{{ title }}</h2>
+            <p class="text-muted">Molimo popunite sva obavezna polja.</p>
+            <hr>
+            {{ render_form(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
