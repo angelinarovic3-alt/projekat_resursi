@@ -20,7 +20,7 @@ class Resurs(db.Model):
     godina_nabavke: Mapped[int] = mapped_column(Integer)
 
     
-    statusi: Mapped[list["StatusResursa"]] = relationship("StatusResursa", back_populates="resurs")
+    statusi: Mapped[list["StatusResursa"]] = relationship("StatusResursa", back_populates="resurs", lazy=True)
 
 class User(db.Model, UserMixin):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

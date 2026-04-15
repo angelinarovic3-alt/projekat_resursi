@@ -5,6 +5,9 @@ from custom_forms import ResursForm, LokacijaForm, StatusForm, LoginForm
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash 
 from flask import flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -54,11 +57,23 @@ def create_admin():
         return "Admin kreiran! Korisničko ime: admin, Lozinka: admin123"
     return "Admin već postoji."
 
+
+@app.route('/admin_panel')
+@login_required
+def admin_panel():
+    if current_user.uloga != 'admin':
+        flash("Nemate ovlašćenja za ovu stranicu!", "danger")
+        return redirect(url_for('home'))
+    
+    svi_korisnici = User.query.all()
+    return render_template("admin.html", korisnici=svi_korisnici)
+
 @app.route("/administracija", methods=["GET", "POST"]) 
 def admin_page():
     all_resources = db.session.execute(db.select(Resurs)).scalars().all()
     all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
     return render_template("administracija.html", resursi=all_resources, lokacije=all_locations)
+
 
 @app.route("/dodaj_status", methods=['GET', 'POST'])
 def add_status():
