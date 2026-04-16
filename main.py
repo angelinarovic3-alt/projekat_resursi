@@ -8,6 +8,7 @@ from flask import flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+from custom_forms import AddUserForm
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -73,6 +74,36 @@ def admin_page():
     all_resources = db.session.execute(db.select(Resurs)).scalars().all()
     all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
     return render_template("administracija.html", resursi=all_resources, lokacije=all_locations)
+
+
+
+
+from custom_forms import AddUserForm # Ne zaboravi import na vrhu!
+
+@app.route('/add_user', methods=['GET', 'POST'])
+@login_required
+def add_user():
+    # Psihologija kontrole: Samo admin sme da kreira druge ljude
+    if current_user.uloga != 'admin':
+        flash("Samo admini mogu dodavati korisnike!", "danger")
+        return redirect(url_for('home'))
+        
+    form = AddUserForm()
+    if form.validate_on_submit():
+        hashed_pw = generate_password_hash(form.password.data, method='pbkdf2:sha256')
+        novi_korisnik = User(
+            username=form.username.data,
+            password=hashed_pw,
+            ime_prezime=form.ime_prezime.data,
+            uloga=form.uloga.data
+        )
+        db.session.add(novi_korisnik)
+        db.session.commit()
+        flash(f"Korisnik {form.username.data} je uspešno kreiran!", "success")
+        return redirect(url_for('admin_panel'))
+        
+    return render_template("add_user.html", form=form)
+
 
 
 @app.route("/dodaj_status", methods=['GET', 'POST'])
@@ -235,7 +266,7 @@ if __name__ == '__main__':
                 username="admin", 
                 password=hashed_pw, 
                 uloga="admin", 
-                ime_prezime="Administrator"
+                ime_prezime="Marko Jovanović"
             )
             db.session.add(novi_admin)
             db.session.commit()
