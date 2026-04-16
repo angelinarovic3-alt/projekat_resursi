@@ -250,6 +250,20 @@ def delete_resource():
     db.session.commit()
     return redirect(url_for('admin_page'))
 
+@app.route('/delete_user/<int:user_id>')
+@login_required
+def delete_user(user_id):
+    if current_user.uloga != 'admin':
+        flash("Nemate ovlašćenje!")
+        return redirect(url_for('home'))
+
+    user_to_delete = db.session.get(User, user_id)
+    if user_to_delete:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash(f"Korisnik {user_to_delete.username} je uspešno obrisan.", "success")
+    
+    return redirect(url_for('admin_panel'))
 
 @app.route('/setup')
 def setup():
