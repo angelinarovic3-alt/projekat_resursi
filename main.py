@@ -8,7 +8,7 @@ from flask import flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
-from custom_forms import AddUserForm
+from custom_forms import AddUserForm, EditUserForm
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -77,13 +77,9 @@ def admin_page():
 
 
 
-
-from custom_forms import AddUserForm # Ne zaboravi import na vrhu!
-
 @app.route('/add_user', methods=['GET', 'POST'])
 @login_required
 def add_user():
-    # Psihologija kontrole: Samo admin sme da kreira druge ljude
     if current_user.uloga != 'admin':
         flash("Samo admini mogu dodavati korisnike!", "danger")
         return redirect(url_for('home'))
@@ -153,25 +149,24 @@ def add_resource():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        username = form.username.data 
+        password = form.password.data
 
-        user = db.session.execute(db.select(User).where(User.username == form.username.data)).scalar()
+        user = db.session.execute(db.select(User).where(User.username == username)).scalar()
         
-        if not user:
-            print(f"DEBUG: Korisnik sa imenom '{form.username.data}' NE POSTOJI u bazi.")
-        else:
-            print(f"DEBUG: Korisnik pronađen. Hash u bazi: {user.password[:20]}...")
-            
 
-            check = check_password_hash(user.password, form.password.data)
-            print(f"DEBUG: Rezultat provere lozinke: {check}")
-            
-            if check:
+        if user:
+            if check_password_hash(user.password, password):
                 login_user(user)
+                flash(f"Dobrodošli nazad, {user.ime_prezime}!", "success")
                 return redirect(url_for('home'))
             else:
-                print("DEBUG: Lozinka se ne poklapa sa hashom.")
-        
-        print("Pogrešno ime ili lozinka")
+                print("DEBUG: Lozinka se ne poklapa.")
+                flash("Pogrešno korisničko ime ili lozinka.", "danger")
+        else:
+            print(f"DEBUG: Korisnik {username} ne postoji.")
+            flash("Pogrešno korisničko ime ili lozinka.", "danger")
+            
     return render_template("login.html", form=form)
 
 @app.route('/logout')
@@ -180,6 +175,27 @@ def logout():
     logout_user()
     flash("Uspešno ste se odjavili sa sistema.", "info")
     return redirect(url_for('login'))
+
+@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_user(user_id):
+    if current_user.uloga != 'admin':
+        return redirect(url_for('home'))
+
+    user_to_edit = db.session.get(User, user_id)
+    
+    form = EditUserForm(obj=user_to_edit)
+    
+    if form.validate_on_submit():
+        user_to_edit.username = form.username.data
+        user_to_edit.ime_prezime = form.ime_prezime.data
+        user_to_edit.uloga = form.uloga.data
+        db.session.commit()
+        flash("Podaci uspešno ažurirani!", "success")
+        return redirect(url_for('admin_panel')) 
+        
+    return render_template("edit_user.html", form=form, user=user_to_edit)
+
 
 @app.route("/dodaj_lokaciju", methods=['GET', 'POST'])
 def add_location():

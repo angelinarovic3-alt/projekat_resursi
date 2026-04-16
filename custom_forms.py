@@ -3,6 +3,13 @@ from wtforms import StringField, IntegerField, SubmitField, SelectField, TextAre
 from wtforms.validators import DataRequired, NumberRange, Optional
 from wtforms import PasswordField
 
+
+class EditUserForm(FlaskForm):
+    username = StringField("Korisničko ime", validators=[DataRequired()])
+    ime_prezime = StringField("Ime i Prezime", validators=[DataRequired()])
+    uloga = SelectField("Uloga", choices=[('radnik', 'Radnik'), ('admin', 'Admin')])
+    submit = SubmitField("Sačuvaj izmene")
+
 class AddUserForm(FlaskForm):
     username = StringField("Korisničko ime", validators=[DataRequired()])
     ime_prezime = StringField("Ime i Prezime", validators=[DataRequired()])
