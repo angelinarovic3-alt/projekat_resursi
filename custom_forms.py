@@ -3,7 +3,6 @@ from wtforms import StringField, IntegerField, SubmitField, SelectField, TextAre
 from wtforms.validators import DataRequired, NumberRange, Optional
 from wtforms import PasswordField
 
-
 class EditUserForm(FlaskForm):
     username = StringField("Korisničko ime", validators=[DataRequired()])
     ime_prezime = StringField("Ime i Prezime", validators=[DataRequired()])
@@ -39,9 +38,11 @@ class LokacijaForm(FlaskForm):
 class StatusForm(FlaskForm):
     resurs_dropdown = SelectField("Odaberi resurs", choices=[], coerce=int, validators=[DataRequired()])
     lokacija_dropdown = SelectField("Odaberi lokaciju", choices=[], coerce=int, validators=[DataRequired()])
+
     
-    korisnik= StringField("Zaduženo lice (Korisnik)", validators=[DataRequired()])
+    korisnik_dropdown = SelectField("Zaduženo lice (Korisnik)", choices=[], coerce=int, validators=[DataRequired()])
     kolicina = IntegerField("Količina na lokaciji", default=1, validators=[DataRequired()])
+    submit = SubmitField("Sačuvaj status")
     
     
     status_kvara = SelectField("Trenutni status", choices=[

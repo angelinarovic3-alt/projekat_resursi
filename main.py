@@ -61,7 +61,7 @@ def create_admin():
 
 @app.route('/admin_panel')
 @login_required
-def admin_panel():
+def admin_panel(): 
     if current_user.uloga != 'admin':
         flash("Nemate ovlašćenja za ovu stranicu!", "danger")
         return redirect(url_for('home'))
@@ -101,34 +101,30 @@ def add_user():
     return render_template("add_user.html", form=form)
 
 
-
-@app.route("/dodaj_status", methods=['GET', 'POST'])
+@app.route("/dodaj-status", methods=["GET", "POST"])
 def add_status():
-    add_form = StatusForm()
-    all_resources = db.session.execute(db.select(Resurs)).scalars().all()
-    all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
-    all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
-    add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in all_locations]
+    form = StatusForm()
     
-    resursi_iz_baze = db.session.execute(db.select(Resurs)).scalars().all()
-    lokacije_iz_baze = db.session.execute(db.select(Lokacija)).scalars().all()
-    add_form.resurs_dropdown.choices = [(r.id, f"{r.naziv} ({r.tip})") for r in all_resources]
-    add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in all_locations]
+    form.resurs_dropdown.choices = [(r.id, r.naziv) for r in Resurs.query.all()]
+    form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in Lokacija.query.all()]
     
-    if add_form.validate_on_submit():
-        new_status = StatusResursa(
-            resurs_id=add_form.resurs_dropdown.data,
-            lokacija_id=add_form.lokacija_dropdown.data,
-            kolicina=add_form.kolicina.data,
-            status_kvara=add_form.status_kvara.data,
-            prioritet=add_form.prioritet.data,
-            opis_problema=add_form.opis_problema.data
+    form.korisnik_dropdown.choices = [(u.id, u.ime_prezime) for u in User.query.all()]
+
+    if form.validate_on_submit():
+        novi_unos = StatusResursa(
+            resurs_id=form.resurs_dropdown.data,
+            lokacija_id=form.lokacija_dropdown.data,
+            korisnik_id=form.korisnik_dropdown.data, 
+            kolicina=form.kolicina.data,
+            status_kvara=form.status_kvara.data,
+            prioritet=form.prioritet.data,
+            opis_problema=form.opis_problema.data
         )
-        db.session.add(new_status)
+        db.session.add(novi_unos)
         db.session.commit()
-        return redirect(url_for('home'))
-    
-    return render_template("add_ad.html", form=add_form, title="Prijavi novo stanje")
+        return redirect(url_for('add_status')) 
+
+    return render_template("add_ad.html", form=form)
 
 @app.route("/dodaj_resurs", methods=['GET', 'POST'])
 def add_resource():
@@ -254,14 +250,23 @@ def delete_resource():
 @login_required
 def delete_user(user_id):
     if current_user.uloga != 'admin':
-        flash("Nemate ovlašćenje!")
+        flash("Greška: Nemate dozvolu za ovu akciju!", "danger")
         return redirect(url_for('home'))
 
     user_to_delete = db.session.get(User, user_id)
+    
+    if user_to_delete.id == current_user.id:
+        flash("Ne možete obrisati sopstveni nalog!", "warning")
+        return redirect(url_for('admin_panel'))
+
     if user_to_delete:
-        db.session.delete(user_to_delete)
-        db.session.commit()
-        flash(f"Korisnik {user_to_delete.username} je uspešno obrisan.", "success")
+        try:
+            db.session.delete(user_to_delete)
+            db.session.commit()
+            flash(f"Korisnik {user_to_delete.username} je uspešno obrisan.", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash("Došlo je do greške prilikom brisanja.", "danger")
     
     return redirect(url_for('admin_panel'))
 
@@ -281,6 +286,20 @@ def setup():
         return "USPEH: Admin (admin/admin123) je upisan u bazu! Sad idi na /login."
     return "Admin već postoji u bazi."
 
+@app.route('/delete_status/<int:status_id>')
+@login_required
+def delete_status(status_id):
+    status_za_brisanje = StatusResursa.query.get_or_404(status_id)
+    
+    try:
+        db.session.delete(status_za_brisanje)
+        db.session.commit()
+        flash("Status uspešno obrisan!", "success")
+    except:
+        db.session.rollback()
+        flash("Greška prilikom brisanja.", "danger")
+        
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@
                 <th scope="col">Tip</th>
                 <th scope="col">Serijski broj</th>
                 <th scope="col">Godina nabavke</th>
-                <th scope="col"></th>
+                <th scope="col">Akcije</th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                 <td>{{r.tip}}</td>
                 <td><code>{{r.serijski_broj or "/"}}</code></td>
                 <td>{{r.godina_nabavke}}</td>
-                 <td style="text-align: right;">  
+                 <td style="text-align: middle;">  
                     {# Ovde koristiš rute iz main.py koje smo napravili #}
                     <a class="btn btn-sm btn-info" href="{{ url_for('add_resource', id=r.id) }}">Izmeni</a>
                     <a class="btn btn-sm btn-warning" href="{{ url_for('delete_resource', id=r.id) }}">Obriši</a> 
@@ -49,7 +49,7 @@
                 <th scope="col">Naziv lokacije</th>
                 <th scope="col">Sprat/Sektor</th>
                 <th scope="col">Odgovorno lice</th>
-                <th scope="col"></th>
+                <th scope="col">Akcije</th>
             </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
                 <td>{{l.sprat or "/"}}</td>
                 <td>{{l.odgovorno_lice}}</td>
 
-                <td style="text-align: right;"> 
+                <td style="text-align:middle;"> 
                     <a class="btn btn-sm btn-info" href="{{ url_for('add_location', id=l.id) }}">Izmeni</a>
                     {# Ako nemaš delete_location rutu, možemo je dodati #}
                     <a class="btn btn-sm btn-warning" href="#">Obriši</a> 
