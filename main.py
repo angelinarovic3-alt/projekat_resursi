@@ -11,7 +11,8 @@ from wtforms.validators import DataRequired
 from custom_forms import AddUserForm, EditUserForm
 import io
 from openpyxl import Workbook
-
+import logging
+from datetime import datetime
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -31,7 +32,25 @@ app.config['SECRET_KEY'] = 'tvoja_tajna_sifra_123'
 db.init_app(app)
 init_my_database(app)
 
+logging.basicConfig(filename='system_activity.log', level=logging.INFO)
 
+def log_akcija(korisnik, poruka):
+    vreme = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    logging.info(f"[{vreme}] Korisnik: {korisnik} | Akcija: {poruka}")
+
+
+def get_analytics():
+    stanja = StatusResursa.query.all()
+    izvestaj = {
+        "ukupno": len(stanja),
+        "neispravno": len([s for s in stanja if s.status_kvara != 'Ispravno']),
+        "hitno": len([s for s in stanja if s.prioritet == 'Hitno']),
+        "procenat_kvarova": 0
+    }
+    if izvestaj["ukupno"] > 0:
+        izvestaj["procenat_kvarova"] = round((izvestaj["neispravno"] / izvestaj["ukupno"]) * 100, 2)
+    
+    return izvestaj
 
 @app.route('/')
 @login_required 

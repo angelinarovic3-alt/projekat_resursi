@@ -1,0 +1,20 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:28:25] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:28:29] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:28:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:28:33] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:29:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:31:43] "GET / HTTP/1.1" 200 -
