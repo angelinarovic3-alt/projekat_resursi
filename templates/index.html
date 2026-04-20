@@ -83,8 +83,13 @@
                 </tbody>
             </table>
         </div> <div class="mt-4 pb-5">
-            <a class="btn btn-primary mb-2" href="{{ url_for('add_status') }}">Prijavi novo stanje/kvar</a>
-            <a class="btn btn-secondary mb-2" href="{{ url_for('admin_page') }}">Administracija sistema</a>
+            <a class="btn btn-primary" href="{{ url_for('add_status') }}">Prijavi novo stanje/kvar</a>
+            
+            <a class="btn btn-outline-success" href="{{ url_for('export_excel') }}">
+                <i class="fas fa-file-excel"></i> Preuzmi Excel
+            </a>
+            
+            <a class="btn btn-secondary" href="{{ url_for('admin_panel') }}">Administracija sistema</a>
         </div>
         
     </div>

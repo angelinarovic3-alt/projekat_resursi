@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from flask_bootstrap import Bootstrap5
 from alchemy_classes import Resurs, Lokacija, StatusResursa, db, init_my_database, User
 from custom_forms import ResursForm, LokacijaForm, StatusForm, LoginForm
@@ -9,6 +9,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 from custom_forms import AddUserForm, EditUserForm
+import io
+from openpyxl import Workbook
+
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -297,6 +300,25 @@ def delete_status(status_id):
         flash("Greška prilikom brisanja.", "danger")
         
     return redirect(url_for('home'))
+
+
+
+
+@app.route("/export_excel")
+def export_excel():
+    wb = Workbook()
+    ws = wb.active
+    ws.append(["Resurs", "Lokacija", "Status", "Prioritet"]) # Headeri
+    
+    podaci = StatusResursa.query.all()
+    for s in podaci:
+        ws.append([s.resurs.naziv, s.lokacija.naziv, s.status_kvara, s.prioritet])
+    
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    
+    return send_file(output, download_name="izvestaj.xlsx", as_attachment=True)
 
 
 if __name__ == '__main__':
