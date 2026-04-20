@@ -28,6 +28,8 @@ app.config['SECRET_KEY'] = 'tvoja_tajna_sifra_123'
 db.init_app(app)
 init_my_database(app)
 
+
+
 @app.route('/')
 @login_required 
 def home():
@@ -104,7 +106,7 @@ def add_user():
 @app.route("/dodaj-status", methods=["GET", "POST"])
 def add_status():
     form = StatusForm()
-    
+
     form.resurs_dropdown.choices = [(r.id, r.naziv) for r in Resurs.query.all()]
     form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in Lokacija.query.all()]
     
@@ -122,7 +124,7 @@ def add_status():
         )
         db.session.add(novi_unos)
         db.session.commit()
-        return redirect(url_for('add_status')) 
+        return redirect(url_for('home')) 
 
     return render_template("add_ad.html", form=form)
 
@@ -140,6 +142,31 @@ def add_resource():
         db.session.commit()
         return redirect(url_for('admin_page'))
     return render_template("add_ad.html", form=form, title="Dodaj novi resurs")
+
+
+@app.route("/izmeni-status/<int:id>", methods=["GET", "POST"])
+def edit_status(id):
+    zapis = StatusResursa.query.get_or_404(id)
+    
+    form = StatusForm(obj=zapis)
+    
+    form.resurs_dropdown.choices = [(r.id, r.naziv) for r in Resurs.query.all()]
+    form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in Lokacija.query.all()]
+    form.korisnik_dropdown.choices = [(u.id, u.ime_prezime) for u in User.query.all()]
+
+    if form.validate_on_submit():
+        zapis.resurs_id = form.resurs_dropdown.data
+        zapis.lokacija_id = form.lokacija_dropdown.data
+        zapis.korisnik_id = form.korisnik_dropdown.data
+        zapis.kolicina = form.kolicina.data
+        zapis.status_kvara = form.status_kvara.data
+        zapis.prioritet = form.prioritet.data
+        zapis.opis_problema = form.opis_problema.data
+        
+        db.session.commit()
+        return redirect(url_for('home'))
+
+    return render_template("add_ad.html", form=form, title="Izmena statusa")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -207,36 +234,6 @@ def add_location():
         return redirect(url_for('admin_page'))
     return render_template("add_ad.html", form=form, title="Dodaj novu lokaciju")
 
-@app.route("/edit_status", methods=['GET', 'POST'])
-def edit_status():
-    status_id = request.args.get('id')
-    status_entry = db.get_or_404(StatusResursa, status_id)
-    
-    all_resources = db.session.execute(db.select(Resurs)).scalars().all()
-    all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
-    
-    edit_form = StatusForm()
-    edit_form.resurs_dropdown.choices = [(r.id, r.naziv) for r in all_resources]
-    edit_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in all_locations]
-
-    if edit_form.validate_on_submit():
-        status_entry.resurs_id = edit_form.resurs_dropdown.data
-        status_entry.lokacija_id = edit_form.lokacija_dropdown.data
-        status_entry.kolicina = edit_form.kolicina.data
-        status_entry.status_kvara = edit_form.status_kvara.data
-        status_entry.prioritet = edit_form.prioritet.data
-        status_entry.opis_problema = edit_form.opis_problema.data
-        db.session.commit()
-        return redirect(url_for('home'))
-
-    edit_form.resurs_dropdown.data = status_entry.resurs_id
-    edit_form.lokacija_dropdown.data = status_entry.lokacija_id
-    edit_form.kolicina.data = status_entry.kolicina
-    edit_form.status_kvara.data = status_entry.status_kvara
-    edit_form.prioritet.data = status_entry.prioritet 
-    edit_form.opis_problema.data = status_entry.opis_problema
-    
-    return render_template("edit_ad.html", form=edit_form, title="Izmeni status/kvar")
 
 @app.route("/delete_resource")
 def delete_resource():

@@ -4,8 +4,7 @@
 
 {% block content %}
 <div class="jumbotron">
-    <div class="container">
-        <h2 class="mt-4">Operativni status</h2>
+    <div class="container-fluid px-4"> <h2 class="mt-4">Operativni status</h2>
         
         {% if stanja == [] %}
         <div class="alert alert-info mt-3">
@@ -13,76 +12,79 @@
         </div>
         {% endif %}
 
-        <table class="table table-striped table-hover mt-3">
-            <thead>
-                <tr class="table-primary">
-                    <th scope="col">Resurs</th>
-                    <th scope="col">Lokacija & Korisnik</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Prioritet</th>
-                    <th scope="col">Opis Problema</th>
-                    <th scope="col">Ažurirano</th>
-                    <th scope="col">Akcije</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in stanja %}
-                {# Bojimo ceo red u crveno samo ako je prioritet HITNO #}
-                <tr class="{% if s.prioritet == 'Hitno' %}table-danger{% endif %}">
-                    
-                    <td>
-                        <strong>{{ s.resurs.naziv }}</strong> <br>
-                        <small class="text-muted">{{ s.resurs.tip }}</small>
-                    </td>
+        <div class="table-responsive mt-3 shadow-sm">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Resurs</th>
+                        <th scope="col">Lokacija & Korisnik</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Prioritet</th>
+                        <th scope="col" style="min-width: 150px;">Opis Problema</th>
+                        <th scope="col">Ažurirano</th>
+                        <th scope="col">Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in stanja %}
+                    <tr class="{% if s.prioritet == 'Hitno' %}table-danger{% endif %}">
+                        
+                        <td>
+                            <strong>{{ s.resurs.naziv }}</strong> <br>
+                            <small class="text-muted">{{ s.resurs.tip }}</small>
+                        </td>
 
-                    <td>
-                        <strong>{{ s.lokacija.naziv }}</strong> <br>
-                        <small class="text-primary">
-                            {% if s.korisnik %}
-                                {{ s.korisnik.ime_prezime }}
+                        <td>
+                            <strong>{{ s.lokacija.naziv }}</strong> <br>
+                            <small class="text-primary">
+                                {% if s.korisnik %}
+                                    {{ s.korisnik.ime_prezime }}
+                                {% else %}
+                                    <span class="text-muted italic">Nije dodeljeno</span>
+                                {% endif %}
+                            </small>
+                        </td>
+
+                        <td>
+                            <span class="badge {% if s.status_kvara == 'Ispravno' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                                {{ s.status_kvara }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {% if s.prioritet == 'Hitno' %}
+                                <span class="text-danger fw-bold">!!! {{ s.prioritet }}</span>
                             {% else %}
-                                <span class="text-muted italic">Nije dodeljeno</span>
+                                {{ s.prioritet }}
                             {% endif %}
-                        </small>
-                    </td>
+                        </td>
 
-                    <td>
-                        <span class="badge {% if s.status_kvara == 'Ispravno' %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                            {{ s.status_kvara }}
-                        </span>
-                    </td>
+                        <td><small>{{ s.opis_problema or "/" }}</small></td>
 
-                    <td>
-                        {% if s.prioritet == 'Hitno' %}
-                            <span class="text-danger fw-bold">!!! {{ s.prioritet }}</span>
-                        {% else %}
-                            {{ s.prioritet }}
-                        {% endif %}
-                    </td>
+                        <td style="white-space: nowrap;">{{ s.datum_prijave.strftime('%d.%m.%Y.') }}<br>
+                            <small class="text-muted">{{ s.datum_prijave.strftime('%H:%M') }}</small>
+                        </td>
 
-                    <td><small>{{ s.opis_problema or "/" }}</small></td>
-
-                    <td>{{ s.datum_prijave.strftime('%d.%m.%Y. %H:%M') }}</td>
-
-                    <td>
-                        <a class="btn btn-sm btn-info" href="{{ url_for('add_resource', id=s.id) }}">
-                            Izmeni
-                        </a>
-                    
-                        <a class="btn btn-sm btn-warning" 
-                           href="{{ url_for('delete_status', status_id=s.id) }}" 
-                           onclick="return confirm('Da li ste sigurni da želite da obrišete ovaj status?')">
-                            Obriši
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class="mt-4">
-            <a class="btn btn-primary" href="{{ url_for('add_status') }}">Prijavi novo stanje/kvar</a>
-            <a class="btn btn-secondary" href="{{ url_for('admin_page') }}">Administracija sistema</a>
+                        <td>
+                            <div class="d-flex gap-1">
+                                <a class="btn btn-sm btn-info" href="{{ url_for('edit_status', id=s.id) }}">
+                                    Izmeni
+                                </a>
+                            
+                                <a class="btn btn-sm btn-warning" 
+                                   href="{{ url_for('delete_status', status_id=s.id) }}" 
+                                   onclick="return confirm('Da li ste sigurni da želite da obrišete ovaj status?')">
+                                    Obriši
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> <div class="mt-4 pb-5">
+            <a class="btn btn-primary mb-2" href="{{ url_for('add_status') }}">Prijavi novo stanje/kvar</a>
+            <a class="btn btn-secondary mb-2" href="{{ url_for('admin_page') }}">Administracija sistema</a>
         </div>
         
     </div>
