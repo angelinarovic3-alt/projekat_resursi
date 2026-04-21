@@ -18,3 +18,430 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 119-883-703
 INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:31:43] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:36:49] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:36:52] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 11:37:04] "GET /export_excel HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:08] "GET /dodaj-status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:16] "GET /izmeni-status/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:21] "[32mPOST /izmeni-status/2 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:24] "GET /izmeni-status/5 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:29] "[32mPOST /izmeni-status/5 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:43] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:51] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:16:57] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:02] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:06] "GET /dodaj-status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:09] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:14] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:17] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:20] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:21] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:33] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:33] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:35] "[32mGET /admin_panel HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:37] "[32mGET /admin_panel HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:37] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:38] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:17:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:19:49] "GET /dodaj-status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:19:54] "GET /izmeni-status/5 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:00] "[32mGET /admin_panel HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:02] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:02] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:13] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:13] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:20:15] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:09] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:10] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:26] "[32mPOST /login?next=/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:26] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:26] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:26] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:26] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=lK5mEWuFXtbh536pc6HE HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:25:27] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:26:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:26:17] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:26:18] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:26:20] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:28:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:28:50] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:29:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:30:00] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:30:32] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:30:32] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:30:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:33] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:33] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:33] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:33] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=UduQ9hz9eSfKzzqdaCLX HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:33] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:36:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:37:00] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:39:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:39:42] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:40:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:41:00] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:41:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:41:30] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:41:59] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:42:01] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:43:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:43:31] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:44:01] "GET /dodaj-status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:44:04] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:50:56] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:50:56] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:50:56] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:50:56] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=va7RoJPQv9uGUAQVVd4d HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:50:56] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:51:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:51:17] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:51:24] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2026 14:51:24] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:20] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:20] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:28] "[32mPOST /login?next=/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:38] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:41] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:14:44] "GET /dodaj-status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:18:06] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:18:07] "GET / HTTP/1.1" 200 -
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:22:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:22:52] "GET /admin_panel HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:18] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:19] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "[32mPOST /login?next=/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=cxBl8owcEE9u2hNTJxRl HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:25:25] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:32] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:32] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:32] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:32] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=nbXaLEQTChQvt5osGocA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:32] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:33] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:33] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:33] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:33] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=nbXaLEQTChQvt5osGocA HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:27:33] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:37] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:37] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:37] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:37] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=nbXaLEQTChQvt5osGocA HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:37] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:53] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:53] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:53] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:53] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=oyutAHI7fP20zbUA68PB HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:35:53] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:41] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:41] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:41] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:41] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=TSGg4jGAIOsqraizhZnT HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:41] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:42] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:42] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:42] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:42] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=TSGg4jGAIOsqraizhZnT HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:38:42] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:01] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:04] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:04] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:10] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:10] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:11] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:11] "GET /login?next=/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:18] "[32mPOST /login?next=/ HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:18] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:18] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:18] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:39:18] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=TSGg4jGAIOsqraizhZnT HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:47] "[35m[1mGET /administracija HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:47] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:47] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:47] "GET /administracija?__debugger__=yes&cmd=resource&f=console.png&s=GDMLEyep1ArbpfcckEUZ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:41:47] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:08] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:10] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:24] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:41] "GET /dodaj-status?id=5 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:43] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:45] "[35m[1mGET /dodaj_resurs HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:45] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:45] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:45] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png&s=sh1rQSo8Va9Kuy4FDvXG HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:45] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:43:59] "[35m[1mGET /dodaj_resurs?id=1 HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:00] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:00] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:00] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png&s=sh1rQSo8Va9Kuy4FDvXG HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:44] "[35m[1mGET /dodaj_resurs?id=1 HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:44] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:44] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:44:44] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png&s=sh1rQSo8Va9Kuy4FDvXG HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:45:31] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:45:32] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:45:34] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:45:35] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:07] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:08] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:10] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:12] "GET /dodaj-status?id=5 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:14] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:16] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:18] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:46:20] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:18] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:19] "[35m[1mGET /dodaj_resurs HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:19] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:19] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:19] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png&s=49dWgjfr38E58PRsblUO HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:19] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:41] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:43] "[35m[1mGET /dodaj_resurs HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:43] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:43] "[36mGET /dodaj_resurs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:47:43] "GET /dodaj_resurs?__debugger__=yes&cmd=resource&f=console.png&s=UKFcHNo1LseOpfWWgr2U HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:48:57] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:48:59] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:00] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:01] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:01] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:04] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:49] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:49:50] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:20] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:21] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:22] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:23] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:23] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:23] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:25] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:27] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:27] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:54:28] "GET /dodaj_lokaciju?id=1 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:55:34] "GET /dodaj_lokaciju?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:55:37] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:04] "GET /dodaj_lokaciju?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:05] "GET /dodaj_lokaciju?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:06] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:08] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:09] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:16] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:38] "[32mPOST /dodaj_resurs?id=1 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:38] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:41] "GET /dodaj_resurs?id=2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:56:43] "GET /dodaj_resurs?id=2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:57:03] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:57:04] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:57:05] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:57:06] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:03] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:16] "[35m[1mGET /administracija HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:16] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:16] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:16] "GET /administracija?__debugger__=yes&cmd=resource&f=console.png&s=HaXFUzaBbbkdvkUbbJr9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:16] "[36mGET /administracija?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:34] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:35] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:36] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:37] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:38] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 08:58:39] "GET /dodaj_resurs?id=2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 119-883-703
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:23] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:24] "GET /dodaj_resurs?id=2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:26] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:26] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:27] "GET /dodaj_resurs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:28] "GET /dodaj_resurs?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:29] "GET /dodaj_lokaciju?id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:30] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:36] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:38] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:40] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:41] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:43] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:46] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:50] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:53] "GET /administracija HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2026 09:14:54] "GET /dodaj_lokaciju HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\admin\\Downloads\\Projekat_IRA (2)\\main.py', reloading
+INFO:werkzeug: * Restarting with stat
