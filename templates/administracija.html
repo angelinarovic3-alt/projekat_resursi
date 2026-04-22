@@ -63,7 +63,7 @@
                 <td style="text-align:middle;"> 
                     <a class="btn btn-sm btn-info" href="{{ url_for('add_location', id=l.id) }}">Izmeni</a>
                     {# Ako nemaš delete_location rutu, možemo je dodati #}
-                    <a class="btn btn-sm btn-warning" href="#">Obriši</a> 
+                    <a class="btn btn-sm btn-warning" href="{{ url_for('delete_location', id=l.id) }}">Obriši</a> 
                 </td>
             </tr>
             {% endfor %}

@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_bootstrap import Bootstrap5
 from alchemy_classes import Resurs, Lokacija, StatusResursa, db, init_my_database, User
-from custom_forms import ResursForm, LokacijaForm, StatusForm, LoginForm
+from custom_forms import ResursForm, LokacijaForm, StatusForm, LoginForm, AddUserForm
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash 
 import io
 from openpyxl import Workbook
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.secret_key = "firma_gis_bezbednost_123"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///QAInventory.db"
-app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'zephyr'
+app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'materia'
 
 # Inicijalizacija
 login_manager = LoginManager()
@@ -28,6 +29,9 @@ def load_user(user_id):
 @app.route('/')
 @login_required 
 def home():
+    total_resursa = Resurs.query.count()
+    aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.status_kvara != 'Ispravno').count()
+    hitni_zadaci = StatusResursa.query.filter_by(prioritet='Hitno').count()
     svi_resursi = db.session.execute(db.select(Resurs)).scalars().all()
     upit_stanja = db.select(StatusResursa).join(Resurs).join(Lokacija).order_by(
         StatusResursa.status_kvara.desc(), 
@@ -63,15 +67,22 @@ def admin_page():
 @login_required
 def add_status():
     add_form = StatusForm()
-    resursi = Resurs.query.all()
-    lokacije = Lokacija.query.all()
-    add_form.resurs_dropdown.choices = [(r.id, f"{r.naziv} ({r.tip})") for r in resursi]
-    add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in lokacije]
+    
+    # Prvo napunimo dropdown-ove da bi korisnik mogao da bira resurse i lokacije
+    korisnici_iz_baze = User.query.all()
+    resursi_iz_baze = Resurs.query.all()
+    lokacije_iz_baze = Lokacija.query.all()
+
+    add_form.korisnik_dropdown.choices = [(k.id, k.ime_prezime) for k in korisnici_iz_baze]
+    add_form.resurs_dropdown.choices = [(r.id, f"{r.naziv} ({r.tip})") for r in resursi_iz_baze]
+    add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in lokacije_iz_baze]
     
     if add_form.validate_on_submit():
+        # Kreiramo novi status i RUČNO povezujemo ID-eve
         new_status = StatusResursa(
             resurs_id=add_form.resurs_dropdown.data,
             lokacija_id=add_form.lokacija_dropdown.data,
+            korisnik_id=current_user.id,  # OVO POVEZUJE SA KORISNIKOM
             kolicina=add_form.kolicina.data,
             status_kvara=add_form.status_kvara.data,
             prioritet=add_form.prioritet.data,
@@ -80,8 +91,8 @@ def add_status():
         db.session.add(new_status)
         db.session.commit()
         return redirect(url_for('home'))
+    
     return render_template("add_ad.html", form=add_form, title="Prijavi novo stanje")
-
 @app.route("/delete_status/<int:status_id>")
 @login_required
 def delete_status(status_id):
@@ -128,12 +139,52 @@ def delete_resource():
 @app.route("/dodaj_lokaciju", methods=['GET', 'POST'])
 @login_required
 def add_location():
-    form = LokacijaForm()
+    lok_id = request.args.get('id')
+    if lok_id:
+        # Ako postoji ID, uzmi tu lokaciju iz baze (IZMENA)
+        lokacija = db.get_or_404(Lokacija, lok_id)
+        form = LokacijaForm(obj=lokacija)
+    else:
+        # Ako nema ID-a, napravi praznu formu (DODAVANJE)
+        lokacija = None
+        form = LokacijaForm()
+
     if form.validate_on_submit():
-        db.session.add(Lokacija(naziv=form.naziv.data, sprat=form.sprat.data, odgovorno_lice=form.odgovorno_lice.data))
+        if lokacija:
+            # Ažuriraj postojeću
+            lokacija.naziv = form.naziv.data
+            lokacija.sprat = form.sprat.data
+            lokacija.odgovorno_lice = form.odgovorno_lice.data
+        else:
+            # Dodaj novu
+            nova_lokacija = Lokacija(
+                naziv=form.naziv.data, 
+                sprat=form.sprat.data, 
+                odgovorno_lice=form.odgovorno_lice.data
+            )
+            db.session.add(nova_lokacija)
+            
         db.session.commit()
         return redirect(url_for('admin_page'))
-    return render_template("add_ad.html", form=form, title="Dodaj novu lokaciju")
+        
+    return render_template("add_ad.html", form=form, title="Upravljanje lokacijom")
+    
+@app.route("/delete_location")
+@login_required
+def delete_location():
+    # Uzimamo 'id' iz URL-a (ono što smo u HTML-u stavili kao id=l.id)
+    lok_id = request.args.get('id')
+    
+    # Pronalazimo lokaciju ili izbacujemo 404 ako ne postoji
+    lokacija = db.get_or_404(Lokacija, lok_id)
+    
+    # Brišemo je iz baze
+    db.session.delete(lokacija)
+    db.session.commit()
+    
+    # Vraćamo se na stranicu administracije
+    return redirect(url_for('admin_page'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -155,21 +206,23 @@ def logout():
 @app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(user_id):
-    if current_user.uloga != 'admin':
-        return redirect(url_for('home'))
-        
+    # 1. Prvo nađi postojećeg korisnika u bazi
     korisnik = db.get_or_404(User, user_id)
-    # Koristimo AddUserForm ali bez obavezne lozinke ako se ne menja
-    form = User(obj=korisnik) 
+    
+    # 2. Prosledi tog korisnika FORMI preko 'obj' argumenta
+    # Ovde ide 'obj', a ne u User()!
+    form = AddUserForm(obj=korisnik) 
     
     if form.validate_on_submit():
+        # Ovde ažuriraš podatke
         korisnik.username = form.username.data
         korisnik.ime_prezime = form.ime_prezime.data
         korisnik.uloga = form.uloga.data
-        if form.password.data: # Ako je uneta nova lozinka, hešuj je
+        
+        if form.password.data:
             korisnik.password = generate_password_hash(form.password.data, method='pbkdf2:sha256')
+            
         db.session.commit()
-        flash(f"Korisnik {korisnik.username} uspešno ažuriran.", "success")
         return redirect(url_for('admin_panel'))
         
     return render_template("add_ad.html", form=form, title="Izmeni korisnika")
@@ -204,6 +257,17 @@ def add_user():
         db.session.commit()
         return redirect(url_for('admin_panel'))
     return render_template("add_ad.html", form=form, title="Dodaj novog zaposlenog")
+
+
+def izracunaj_rizik_resursa(resurs_id):
+    broj_kvarova = db.session.query(StatusResursa).filter_by(resurs_id=resurs_id).count()
+    
+    if broj_kvarova > 5:
+        return "KRITIČNO"
+    elif broj_kvarova > 2:
+        return "PROBLEM"
+    return "STABILNO"
+
 
 if __name__ == '__main__':
     with app.app_context():
