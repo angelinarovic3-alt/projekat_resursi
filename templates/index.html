@@ -3,6 +3,10 @@
 {% block title %}QA & Inventar - Dashboard{% endblock %}
 
 {% block content %}
+<div class="mb-3">
+    <span class="badge bg-primary p-2">Ukupno resursa: {{ resursi|length }}</span>
+    <span class="badge bg-danger p-2">Aktivne intervencije: {{ statusi|length }}</span>
+</div>
 <div class="jumbotron">
     <div class="container-fluid px-4"> <h2 class="mt-4">Operativni status</h2>
         
@@ -53,7 +57,7 @@
 
                         <td>
                             {% if s.prioritet == 'Hitno' %}
-                                <span class="text-danger fw-bold">!!! {{ s.prioritet }}</span>
+                                <span class="text-danger fw-bold"> {{ s.prioritet }}</span>
                             {% else %}
                                 {{ s.prioritet }}
                             {% endif %}

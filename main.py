@@ -11,7 +11,7 @@ from sqlalchemy import func
 app = Flask(__name__)
 app.secret_key = "firma_gis_bezbednost_123"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///QAInventory.db"
-app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'materia'
+app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lux'
 
 # Inicijalizacija
 login_manager = LoginManager()
@@ -39,6 +39,17 @@ def home():
     )
     sva_stanja = db.session.execute(upit_stanja).scalars().all()
     return render_template("index.html", stanja=sva_stanja, resursi=svi_resursi, naslov="Glavni Dashboard")
+
+@app.route('/pocetna')
+def pocetna():
+    svi_resursi = Resurs.query.all()
+    svi_korisnici = User.query.all()
+    svi_statusi = StatusResursa.query.all() 
+
+    return render_template('index.html', 
+                           resursi=svi_resursi, 
+                           korisnici=svi_korisnici, 
+                           statusi=svi_statusi)
 
 @app.route('/admin_panel')
 @login_required
@@ -78,11 +89,11 @@ def add_status():
     add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in lokacije_iz_baze]
     
     if add_form.validate_on_submit():
-        # Kreiramo novi status i RUČNO povezujemo ID-eve
+
         new_status = StatusResursa(
             resurs_id=add_form.resurs_dropdown.data,
             lokacija_id=add_form.lokacija_dropdown.data,
-            korisnik_id=current_user.id,  # OVO POVEZUJE SA KORISNIKOM
+            korisnik_id=current_user.id,  
             kolicina=add_form.kolicina.data,
             status_kvara=add_form.status_kvara.data,
             prioritet=add_form.prioritet.data,
@@ -101,7 +112,7 @@ def delete_status(status_id):
     db.session.commit()
     return redirect(url_for('home'))
 
-# --- EXCEL EXPORT (Novo!) ---
+
 @app.route("/export_excel")
 @login_required
 def export_excel():
@@ -116,7 +127,7 @@ def export_excel():
     buffer.seek(0)
     return send_file(buffer, download_name="IT_Izvestaj.xlsx", as_attachment=True)
 
-# --- OSTALE RUTE (Resursi, Lokacije, Login) ---
+
 @app.route("/dodaj_resurs", methods=['GET', 'POST'])
 @login_required
 def add_resource():
@@ -141,22 +152,22 @@ def delete_resource():
 def add_location():
     lok_id = request.args.get('id')
     if lok_id:
-        # Ako postoji ID, uzmi tu lokaciju iz baze (IZMENA)
+
         lokacija = db.get_or_404(Lokacija, lok_id)
         form = LokacijaForm(obj=lokacija)
     else:
-        # Ako nema ID-a, napravi praznu formu (DODAVANJE)
+
         lokacija = None
         form = LokacijaForm()
 
     if form.validate_on_submit():
         if lokacija:
-            # Ažuriraj postojeću
+            
             lokacija.naziv = form.naziv.data
             lokacija.sprat = form.sprat.data
             lokacija.odgovorno_lice = form.odgovorno_lice.data
         else:
-            # Dodaj novu
+    
             nova_lokacija = Lokacija(
                 naziv=form.naziv.data, 
                 sprat=form.sprat.data, 
@@ -172,17 +183,14 @@ def add_location():
 @app.route("/delete_location")
 @login_required
 def delete_location():
-    # Uzimamo 'id' iz URL-a (ono što smo u HTML-u stavili kao id=l.id)
+
     lok_id = request.args.get('id')
     
-    # Pronalazimo lokaciju ili izbacujemo 404 ako ne postoji
     lokacija = db.get_or_404(Lokacija, lok_id)
     
-    # Brišemo je iz baze
     db.session.delete(lokacija)
     db.session.commit()
     
-    # Vraćamo se na stranicu administracije
     return redirect(url_for('admin_page'))
 
 
@@ -202,19 +210,15 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# --- IZMENA KORISNIKA ---
+
 @app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(user_id):
-    # 1. Prvo nađi postojećeg korisnika u bazi
     korisnik = db.get_or_404(User, user_id)
     
-    # 2. Prosledi tog korisnika FORMI preko 'obj' argumenta
-    # Ovde ide 'obj', a ne u User()!
     form = AddUserForm(obj=korisnik) 
     
     if form.validate_on_submit():
-        # Ovde ažuriraš podatke
         korisnik.username = form.username.data
         korisnik.ime_prezime = form.ime_prezime.data
         korisnik.uloga = form.uloga.data
@@ -227,7 +231,6 @@ def edit_user(user_id):
         
     return render_template("add_ad.html", form=form, title="Izmeni korisnika")
 
-# --- BRISANJE KORISNIKA ---
 @app.route('/delete_user/<int:user_id>')
 @login_required
 def delete_user(user_id):
@@ -241,13 +244,13 @@ def delete_user(user_id):
     flash("Korisnik obrisan.", "info")
     return redirect(url_for('admin_panel'))
 
-# --- DODAVANJE KORISNIKA (da se slaže sa tvojim dugmetom) ---
+
 @app.route('/add_user', methods=['GET', 'POST'])
 @login_required
 def add_user():
     if current_user.uloga != 'admin':
         return redirect(url_for('home'))
-    from custom_forms import AddUserForm # Proveri da li se ovako zove u custom_forms.py
+    from custom_forms import AddUserForm #
     form = AddUserForm()
     if form.validate_on_submit():
         hashed_pw = generate_password_hash(form.password.data, method='pbkdf2:sha256')

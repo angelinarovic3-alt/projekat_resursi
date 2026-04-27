@@ -1,5 +1,9 @@
 import pytest
-from main import app  # Izbacili smo 'db' i 'Korisnik' jer ti ne trebaju za ovaj test
+import sys
+import os
+from main import app 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 @pytest.fixture
 def client():
@@ -10,10 +14,9 @@ def client():
 
 def test_login_prolaz(client):
     """Provera da li login radi sa podacima koje si stavila u main.py"""
-    # Ovde upiši ono korisničko ime i lozinku koje stvarno kucaš kad se loguješ
     res = client.post('/login', data={
-        'korisnicko_ime': 'admin',  # PROMENI OVO NA TVOJE
-        'lozinka': 'admin123'       # PROMENI OVO NA TVOJE
+        'korisnicko_ime': 'admin',  
+        'lozinka': 'admin123'       
     }, follow_redirects=True)
     
     assert res.status_code == 200
