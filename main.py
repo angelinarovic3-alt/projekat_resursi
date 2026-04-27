@@ -42,14 +42,20 @@ def home():
 
 @app.route('/pocetna')
 def pocetna():
-    svi_resursi = Resurs.query.all()
-    svi_korisnici = User.query.all()
-    svi_statusi = StatusResursa.query.all() 
+    # 1. Popravi ovu liniju (izbriši .count)
+    svi_resursi = Resurs.query.all() 
+    
+    # 2. Korisnici su OK
+    svi_korisnici = User.query.all() 
+    
+    # 3. Napravi poseban upit za "Aktivne intervencije"
+    # Ovde filtriraj po onome što upisuješ u bazu (npr. 'Pokvareno' ili 'U servisu')
+    aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.opis_stanja != 'Ispravno').all()
 
     return render_template('index.html', 
                            resursi=svi_resursi, 
                            korisnici=svi_korisnici, 
-                           statusi=svi_statusi)
+                           statusi=aktivni_kvarovi) # Šaljemo samo filtrirane
 
 @app.route('/admin_panel')
 @login_required
@@ -132,6 +138,7 @@ def export_excel():
 @login_required
 def add_resource():
     form = ResursForm()
+    
     if form.validate_on_submit():
         db.session.add(Resurs(naziv=form.naziv.data, tip=form.tip.data, serijski_broj=form.serijski_broj.data, godina_nabavke=form.godina_nabavke.data))
         db.session.commit()
