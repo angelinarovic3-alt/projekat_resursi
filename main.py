@@ -29,33 +29,24 @@ def load_user(user_id):
 @app.route('/')
 @login_required 
 def home():
-    total_resursa = Resurs.query.count()
-    aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.status_kvara != 'Ispravno').count()
-    hitni_zadaci = StatusResursa.query.filter_by(prioritet='Hitno').count()
-    svi_resursi = db.session.execute(db.select(Resurs)).scalars().all()
+    # 1. Podaci za bedževe (brojevi)
+    svi_resursi = Resurs.query.all()
+    # Filtriramo sve što NIJE 'Ispravno' za crveni bedž
+    aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.status_kvara != 'Ispravno').all()
+    
+    # 2. Podaci za tabelu (upit koji si već imala)
     upit_stanja = db.select(StatusResursa).join(Resurs).join(Lokacija).order_by(
         StatusResursa.status_kvara.desc(), 
         StatusResursa.prioritet.asc()
     )
     sva_stanja = db.session.execute(upit_stanja).scalars().all()
-    return render_template("index.html", stanja=sva_stanja, resursi=svi_resursi, naslov="Glavni Dashboard")
-
-@app.route('/pocetna')
-def pocetna():
-    # 1. Popravi ovu liniju (izbriši .count)
-    svi_resursi = Resurs.query.all() 
     
-    # 2. Korisnici su OK
-    svi_korisnici = User.query.all() 
-    
-    # 3. Napravi poseban upit za "Aktivne intervencije"
-    # Ovde filtriraj po onome što upisuješ u bazu (npr. 'Pokvareno' ili 'U servisu')
-    aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.opis_stanja != 'Ispravno').all()
-
-    return render_template('index.html', 
+    # 3. Šaljemo SVE varijable koje HTML traži
+    return render_template("index.html", 
+                           stanja=sva_stanja, 
                            resursi=svi_resursi, 
-                           korisnici=svi_korisnici, 
-                           statusi=aktivni_kvarovi) # Šaljemo samo filtrirane
+                           statusi=aktivni_kvarovi, # DODAJ OVO!
+                           naslov="Glavni Dashboard")
 
 @app.route('/admin_panel')
 @login_required
@@ -114,7 +105,7 @@ def add_status():
 @login_required
 def delete_status(status_id):
     zapis = db.get_or_404(StatusResursa, status_id)
-    db.session.delete(zapis)
+    db.session.delete(zapis) 
     db.session.commit()
     return redirect(url_for('home'))
 
@@ -144,6 +135,39 @@ def add_resource():
         db.session.commit()
         return redirect(url_for('admin_page'))
     return render_template("add_ad.html", form=form, title="Dodaj novi resurs")
+
+@app.route('/izmeni-stanje/<int:stanje_id>', methods=['GET', 'POST'])
+@login_required
+def izmeni_stanje(stanje_id):
+    # 1. Pronađi tačno to stanje
+    stanje = StatusResursa.query.get_or_404(stanje_id)
+    
+    # 2. Liste za dropdown menije
+    svi_resursi = Resurs.query.all()
+    sve_lokacije = Lokacija.query.all()
+    svi_korisnici = User.query.all()
+
+    if request.method == 'POST':
+        # 3. Ažuriranje podataka iz forme
+        stanje.resurs_id = request.form.get('resurs_id')
+        stanje.lokacija_id = request.form.get('lokacija_id')
+        stanje.user_id = request.form.get('user_id')
+        stanje.status_kvara = request.form.get('status_kvara')
+        stanje.prioritet = request.form.get('prioritet')
+        stanje.opis_stanja = request.form.get('opis_stanja')
+
+        # 4. Čuvanje promena
+        db.session.commit()
+        return redirect(url_for('home'))
+
+    # 5. Prikazivanje stranice sa svim podacima
+    return render_template('izmeni_stanje.html', 
+                           stanje=stanje, 
+                           resursi=svi_resursi, 
+                           lokacije=sve_lokacije, 
+                           korisnici=svi_korisnici)
+
+
 
 @app.route("/delete_resource")
 @login_required

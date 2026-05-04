@@ -4,17 +4,20 @@
 
 {% block content %}
 <div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Pretraži resurse, statuse ili lokacije...">
+</div>
+<div class="mb-3">
     <span class="badge bg-primary p-2">Ukupno resursa: {{ resursi|length }}</span>
     <span class="badge bg-danger p-2">Aktivne intervencije: {{ statusi|length }}</span>
     <div class="mb-3 text-end">
         <a class="btn btn-primary" href="{{ url_for('add_status') }}">Prijavi novo stanje/kvar</a>
         <a class="btn btn-secondary" href="{{ url_for('admin_page') }}">Administracija sistema</a>
-    
+    </div>
 </div>
 <div class="jumbotron">
     <div class="container-fluid px-4"> <h2 class="mt-4">Operativni status</h2>
         
-        {% if stanja == [] %}
+        {% if not stanja %}
         <div class="alert alert-info mt-3">
             Trenutno nema evidentiranih resursa ili kvarova u bazi.
         </div>
@@ -75,7 +78,7 @@
 
                         <td>
                             <div class="d-flex gap-1">
-                                <a class="btn btn-sm btn-info" href="{{ url_for('add_status', id=s.id) }}">
+                                <a class="btn btn-sm btn-info" href="{{ url_for('izmeni_stanje', stanje_id=s.id) }}">
                                     Izmeni
                                 </a>
                             
