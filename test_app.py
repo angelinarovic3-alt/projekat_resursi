@@ -20,5 +20,4 @@ def test_login_prolaz(client):
     }, follow_redirects=True)
     
     assert res.status_code == 200
-    # Proveri da li se na stranici nakon logina pojavljuje neka od ovih reči
     assert b"Status" in res.data or b"Inventar" in res.data

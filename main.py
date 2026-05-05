@@ -13,7 +13,7 @@ app.secret_key = "firma_gis_bezbednost_123"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///QAInventory.db"
 app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lux'
 
-# Inicijalizacija
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -25,44 +25,52 @@ init_my_database(app)
 def load_user(user_id):
     return db.get_or_404(User, user_id)
 
-# --- HOME ---
+
 @app.route('/')
 @login_required 
 def home():
-    # 1. Podaci za bedževe (brojevi)
     svi_resursi = Resurs.query.all()
-    # Filtriramo sve što NIJE 'Ispravno' za crveni bedž
     aktivni_kvarovi = StatusResursa.query.filter(StatusResursa.status_kvara != 'Ispravno').all()
+
+    search_query = request.args.get('search', '')
+
+    upit_stanja = db.select(StatusResursa).join(Resurs).join(Lokacija)
+
+    if search_query:
+        upit_stanja = upit_stanja.where(
+            (Resurs.naziv.ilike(f'%{search_query}%')) | 
+            (StatusResursa.status_kvara.ilike(f'%{search_query}%')) |
+            (Lokacija.naziv.ilike(f'%{search_query}%'))
+        )
     
-    # 2. Podaci za tabelu (upit koji si već imala)
-    upit_stanja = db.select(StatusResursa).join(Resurs).join(Lokacija).order_by(
+    upit_stanja = upit_stanja.order_by(
         StatusResursa.status_kvara.desc(), 
         StatusResursa.prioritet.asc()
     )
+    
     sva_stanja = db.session.execute(upit_stanja).scalars().all()
     
-    # 3. Šaljemo SVE varijable koje HTML traži
+
     return render_template("index.html", 
                            stanja=sva_stanja, 
                            resursi=svi_resursi, 
-                           statusi=aktivni_kvarovi, # DODAJ OVO!
+                           statusi=aktivni_kvarovi,
                            naslov="Glavni Dashboard")
 
 @app.route('/admin_panel')
 @login_required
 def admin_panel():
-    # STRIKTNA PROVERA: Samo korisnik sa ulogom 'admin' prolazi dalje
+    
     if current_user.uloga != 'admin':
         flash("Greška: Nemate administrativna ovlašćenja za pristup korisnicima!", "danger")
         return redirect(url_for('home'))
     
-    # Izvlačimo sve korisnike iz baze
     svi_korisnici = User.query.all()
     
-    # KLJUČNO: Šaljemo ih pod oba imena da bi tvoj HTML (koji god da koristiš) radio
+
     return render_template("admin.html", korisnici=svi_korisnici, users=svi_korisnici)
 
-# --- INVENTAR I LOKACIJE (Tvoja originalna Administracija) ---
+
 @app.route("/administracija", methods=["GET", "POST"]) 
 @login_required
 def admin_page():
@@ -70,13 +78,12 @@ def admin_page():
     all_locations = db.session.execute(db.select(Lokacija)).scalars().all()
     return render_template("administracija.html", resursi=all_resources, lokacije=all_locations)
 
-# --- RAD SA STATUSIMA ---
+
 @app.route("/dodaj_status", methods=['GET', 'POST'])
 @login_required
 def add_status():
     add_form = StatusForm()
     
-    # Prvo napunimo dropdown-ove da bi korisnik mogao da bira resurse i lokacije
     korisnici_iz_baze = User.query.all()
     resursi_iz_baze = Resurs.query.all()
     lokacije_iz_baze = Lokacija.query.all()
@@ -86,11 +93,11 @@ def add_status():
     add_form.lokacija_dropdown.choices = [(l.id, l.naziv) for l in lokacije_iz_baze]
     
     if add_form.validate_on_submit():
-
+        
         new_status = StatusResursa(
             resurs_id=add_form.resurs_dropdown.data,
             lokacija_id=add_form.lokacija_dropdown.data,
-            korisnik_id=current_user.id,  
+            korisnik_id=add_form.korisnik_dropdown.data, 
             kolicina=add_form.kolicina.data,
             status_kvara=add_form.status_kvara.data,
             prioritet=add_form.prioritet.data,
@@ -98,6 +105,7 @@ def add_status():
         )
         db.session.add(new_status)
         db.session.commit()
+        flash("Status uspešno dodat!", "success") 
         return redirect(url_for('home'))
     
     return render_template("add_ad.html", form=add_form, title="Prijavi novo stanje")
@@ -139,16 +147,16 @@ def add_resource():
 @app.route('/izmeni-stanje/<int:stanje_id>', methods=['GET', 'POST'])
 @login_required
 def izmeni_stanje(stanje_id):
-    # 1. Pronađi tačno to stanje
+
     stanje = StatusResursa.query.get_or_404(stanje_id)
     
-    # 2. Liste za dropdown menije
+    
     svi_resursi = Resurs.query.all()
     sve_lokacije = Lokacija.query.all()
     svi_korisnici = User.query.all()
 
     if request.method == 'POST':
-        # 3. Ažuriranje podataka iz forme
+        
         stanje.resurs_id = request.form.get('resurs_id')
         stanje.lokacija_id = request.form.get('lokacija_id')
         stanje.user_id = request.form.get('user_id')
@@ -156,11 +164,11 @@ def izmeni_stanje(stanje_id):
         stanje.prioritet = request.form.get('prioritet')
         stanje.opis_stanja = request.form.get('opis_stanja')
 
-        # 4. Čuvanje promena
+        
         db.session.commit()
         return redirect(url_for('home'))
 
-    # 5. Prikazivanje stranice sa svim podacima
+
     return render_template('izmeni_stanje.html', 
                            stanje=stanje, 
                            resursi=svi_resursi, 
@@ -204,6 +212,7 @@ def add_location():
                 sprat=form.sprat.data, 
                 odgovorno_lice=form.odgovorno_lice.data
             )
+
             db.session.add(nova_lokacija)
             
         db.session.commit()

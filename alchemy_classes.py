@@ -61,7 +61,7 @@ class StatusResursa(db.Model):
     resurs: Mapped["Resurs"] = relationship("Resurs", back_populates="statusi")
     lokacija: Mapped["Lokacija"] = relationship("Lokacija", back_populates="izvestaji")
     korisnik: Mapped["User"] = relationship("User", back_populates="zaduzeni_statusi")
-
+    
 def init_my_database(app):
     with app.app_context():
         db.create_all() 
