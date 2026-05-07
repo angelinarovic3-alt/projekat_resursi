@@ -1,76 +1,103 @@
 {% extends "base.html" %}
+
 {% block title %}Administracija - QA & Inventar{% endblock %}
+
 {% block content %}
-{% from "bootstrap5/form.html" import render_form %}
-<div class="jumbotron">
-    <div class="container">
-         <h2 class="mt-4">Administracija Resursa (Inventar)</h2>
-
-        {% if resursi == [] %}
-        <p>Nema unetih resursa u bazi.</p>
-        {% endif %}
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr class="table-primary">
-                <th scope="col">Naziv uređaja</th>
-                <th scope="col">Tip</th>
-                <th scope="col">Serijski broj</th>
-                <th scope="col">Godina nabavke</th>
-                <th scope="col">Akcije</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for r in resursi %}
-            <tr>
-                <td><strong>{{r.naziv}}</strong></td>
-                <td>{{r.tip}}</td>
-                <td><code>{{r.serijski_broj or "/"}}</code></td>
-                <td>{{r.godina_nabavke}}</td>
-                 <td style="text-align: middle;">  
-                    {# Ovde koristiš rute iz main.py koje smo napravili #}
-                    <a class="btn btn-sm btn-info" href="{{ url_for('add_resource', id=r.id) }}">Izmeni</a>
-                    <a class="btn btn-sm btn-warning" href="{{ url_for('delete_resource', id=r.id) }}">Obriši</a> 
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a class="btn btn-primary" href="{{ url_for('add_resource') }}">Dodaj novi resurs</a>
-
-<hr class="my-5">
-
-        <h2>Administracija Lokacija</h2>
-
-        {% if lokacije == [] %}
-        <p>Nema unetih lokacija.</p>
-        {% endif %}
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr class="table-primary">
-                <th scope="col">Naziv lokacije</th>
-                <th scope="col">Sprat/Sektor</th>
-                <th scope="col">Odgovorno lice</th>
-                <th scope="col">Akcije</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for l in lokacije %}
-            <tr>
-                <td>{{l.naziv}}</td>
-                <td>{{l.sprat or "/"}}</td>
-                <td>{{l.odgovorno_lice}}</td>
-
-                <td style="text-align:middle;"> 
-                    <a class="btn btn-sm btn-info" href="{{ url_for('add_location', id=l.id) }}">Izmeni</a>
-                    {# Ako nemaš delete_location rutu, možemo je dodati #}
-                    <a class="btn btn-sm btn-warning" href="{{ url_for('delete_location', id=l.id) }}">Obriši</a> 
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a class="btn btn-primary" href="{{ url_for('add_location') }}">Dodaj novu lokaciju</a>
-
+<div class="container py-4">
+    
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+        <h2 class="fw-bold text-primary"><i class="fas fa-tools me-2"></i>Sistemska Administracija</h2>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary shadow-sm">
+            <i class="fas fa-home me-1"></i> Nazad na Dashboard
+        </a>
     </div>
+
+    <!-- SEKCIJA 1: RESURSI -->
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">Upravljanje Resursima (Inventar)</h5>
+            <a class="btn btn-success btn-sm px-3 shadow-sm" href="{{ url_for('add_resource') }}">
+                 Dodaj novi resurs
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">Naziv</th>
+                            <th>Tip</th>
+                            <th>Serijski broj</th>
+                            <th>Godina</th>
+                            <th class="text-center">Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in resursi %}
+                        <tr>
+                            <td class="ps-3 fw-bold">{{ r.naziv }}</td>
+                            <td>{{ r.tip }}</td>
+                            <td><code>{{ r.serijski_broj or "/" }}</code></td>
+                            <td>{{ r.godina_nabavke }}</td>
+                            <td class="text-center">
+                                <!-- OVDE SU DUGMICI -->
+                                <a href="{{ url_for('add_resource', id=r.id) }}" class="btn btn-info btn-sm text-white px-3 me-1">
+                                    Izmeni
+                                </a>
+                                <a href="{{ url_for('delete_resource', id=r.id) }}" class="btn btn-warning btn-sm px-3" onclick="return confirm('Obrisati?')">
+                                    Obriši
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEKCIJA 2: LOKACIJE -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">Upravljanje Lokacijama</h5>
+            <a class="btn btn-success btn-sm px-3 shadow-sm" href="{{ url_for('add_location') }}">
+                 Nova lokacija
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">Naziv lokacije</th>
+                            <th>Sprat</th>
+                            <th>Odgovorno lice</th>
+                            <th class="text-center">Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for l in lokacije %}
+                        <tr>
+                            <td class="ps-3 fw-bold">{{ l.naziv }}</td>
+                            <td>{{ l.sprat or "/" }}</td>
+                            <td>{{ l.odgovorno_lice }}</td>
+                            <td class="text-center">
+                                <!-- OVDE SU DUGMICI -->
+                                <a href="{{ url_for('add_location', id=l.id) }}" class="btn btn-info btn-sm text-white px-3 me-1">
+                                    Izmeni
+                                </a>
+                                <a href="{{ url_for('delete_location', id=l.id) }}" class="btn btn-warning btn-sm px-3" onclick="return confirm('Obrisati?')">
+                                    Obriši
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
